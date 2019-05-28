@@ -1,27 +1,57 @@
-
-
-// Introduction, Lecture-9
-
-// const fs = require('fs');
-// fs.writeFileSync('notes.txt', 'My name is Martuza.');
-// fs.appendFileSync('notes.txt', ' I am from Dhaka')
-
-// Importing File
-
-// const mart = require('./utils.js')
-// const sum = mart(4, 2)
-// console.log(sum)
-
-// Using validator library
-//const validator = require('validator')
-
 const chalk = require('chalk')
+const yargs = require('yargs')
 const notes = require('./notes.js')
 
-const printNotes = notes()
+//Customize the yargs version
+yargs.version('1.1.0')
 
-console.log(printNotes)
+//Create add command
+yargs.command({
+    command: 'add',
+    describe: 'Add a new Note',
+    builder: {
+        title: {
+            describe: 'Note Title',
+            demandOption: true,
+            type: 'string'
+        },
+        body:{
+            description: 'Note Description ..',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv) {
+        console.log(chalk.yellow('Adding a new note!' + ' Title: ' + argv.title))
+        console.log(chalk.cyan(' Body: ' + argv.body))
+    }
+})
 
-//console.log(validator.isEmail('martuza@me.com'))
+//Create remove command
+yargs.command({
+    command: 'remove',
+    describe: 'Remove a note',
+    handler: function() {
+        console.log(chalk.red('Removing the note'))
+    }
+})
 
-console.log(chalk.red.bold.inverse('Error!'))//text-styling with Chalk library
+// Create List command
+yargs.command({
+    command: 'list',
+    describe: 'List a note',
+    handler: function() {
+        console.log(chalk.green('Listing the note'))
+    }
+})
+
+
+// Create Read command
+yargs.command({
+    command: 'read',
+    describe: 'Read a note',
+    handler: function() {
+        console.log(chalk.cyan('Reading the note'))
+    }
+})
+yargs.parse()
