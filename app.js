@@ -12,8 +12,12 @@
 // const sum = mart(4, 2)
 // console.log(sum)
 
+const validator = require('validator')
+
 const notes = require('./notes.js')
 
 const printNotes = notes()
 
 console.log(printNotes)
+
+console.log(validator.isEmail('martuza@me.com'))
