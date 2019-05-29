@@ -21,9 +21,8 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(argv) {
-        console.log(chalk.yellow('Adding a new note!' + ' Title: ' + argv.title))
-        console.log(chalk.cyan(' Body: ' + argv.body))
+    handler: function (argv) {
+        notes.addNote(argv.title, argv.body)
     }
 })
 
